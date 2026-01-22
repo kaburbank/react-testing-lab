@@ -7,14 +7,14 @@ import { vi } from "vitest";
 const mockTransactions = [
   {
     id: 1,
-    date: "2023-01-01",
-    description: "Coffee",
+    date: "2026-01-01",
+    description: "Latte",
     category: "Food",
     amount: "3.50",
   },
   {
     id: 2,
-    date: "2023-01-02",
+    date: "2026-01-02",
     description: "Groceries",
     category: "Food",
     amount: "42.00",
@@ -38,7 +38,7 @@ describe("Display Transactions", () => {
     render(<AccountContainer />);
 
     await waitFor(() => {
-      expect(screen.getByText("Coffee")).toBeInTheDocument();
+      expect(screen.getByText("Latte")).toBeInTheDocument();
       expect(screen.getByText("Groceries")).toBeInTheDocument();
       expect(screen.getAllByText("Food")).toHaveLength(2);
       expect(screen.getByText("3.50")).toBeInTheDocument();

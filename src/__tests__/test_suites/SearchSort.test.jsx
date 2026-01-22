@@ -6,21 +6,21 @@ import { vi } from "vitest";
 const mockTransactions = [
   {
     id: 1,
-    date: "2023-01-01",
-    description: "Coffee",
+    date: "2026-01-01",
+    description: "Latte",
     category: "Food",
     amount: "3.50",
   },
   {
     id: 2,
-    date: "2023-01-02",
+    date: "2026-01-02",
     description: "Groceries",
     category: "Food",
     amount: "42.00",
   },
   {
     id: 3,
-    date: "2023-01-03",
+    date: "2026-01-03",
     description: "Books",
     category: "Education",
     amount: "15.00",
@@ -44,7 +44,7 @@ describe("Search and Sort Transactions", () => {
     render(<AccountContainer />);
 
     await waitFor(() => {
-      expect(screen.getByText("Coffee")).toBeInTheDocument();
+      expect(screen.getByText("Latte")).toBeInTheDocument();
     });
 
     fireEvent.change(
@@ -54,7 +54,7 @@ describe("Search and Sort Transactions", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Books")).toBeInTheDocument();
-      expect(screen.queryByText("Coffee")).not.toBeInTheDocument();
+      expect(screen.queryByText("Latte")).not.toBeInTheDocument();
       expect(screen.queryByText("Groceries")).not.toBeInTheDocument();
     });
   });
@@ -82,9 +82,8 @@ describe("Search and Sort Transactions", () => {
       const firstDataRow = rows[1].textContent;
       const secondDataRow = rows[2].textContent;
 
-      // Education comes before Food alphabetically
-      expect(firstDataRow).toContain("Books"); // Education
-      expect(secondDataRow).toContain("Coffee"); // Food
+      expect(firstDataRow).toContain("Books"); 
+      expect(secondDataRow).toContain("Latte"); 
     });
   });
 });
