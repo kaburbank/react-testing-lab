@@ -3,10 +3,13 @@ import AccountContainer from "../../components/AccountContainer";
 import React from "react";
 import { vi } from "vitest";
 
+// Start with an empty list of transactions
 const mockTransactions = [];
 
+// Tests for adding transactions
 describe("Add Transactions", () => {
-  beforeEach(() => {
+  // Mock fetch for both GET and POST requests
+    beforeEach(() => {
     global.fetch = vi.fn((url, options) => {
       if (options?.method === "POST") {
         return Promise.resolve({
@@ -24,6 +27,7 @@ describe("Add Transactions", () => {
     vi.restoreAllMocks();
   });
 
+  // Test adding a new transaction
   it("adds new transaction to the frontend after form submit", async () => {
     render(<AccountContainer />);
 
@@ -48,6 +52,7 @@ describe("Add Transactions", () => {
     });
   });
 
+  // Test that fetch is called with POST method
   it("calls fetch with POST method", async () => {
     render(<AccountContainer />);
 
@@ -66,6 +71,7 @@ describe("Add Transactions", () => {
 
     fireEvent.click(screen.getByText("Add Transaction"));
 
+    // Verify that fetch was called with POST method
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(
         "http://localhost:6001/transactions",

@@ -3,6 +3,7 @@ import AccountContainer from "../../components/AccountContainer";
 import React from "react";
 import { vi } from "vitest";
 
+// Mock transactions data
 const mockTransactions = [
   {
     id: 1,
@@ -14,7 +15,7 @@ const mockTransactions = [
   {
     id: 2,
     date: "2026-01-02",
-    description: "Groceries",
+    description: "Snacks",
     category: "Food",
     amount: "42.00",
   },
@@ -27,6 +28,7 @@ const mockTransactions = [
   },
 ];
 
+// Tests for searching and sorting transactions
 describe("Search and Sort Transactions", () => {
   beforeEach(() => {
     global.fetch = vi.fn(() =>
@@ -40,6 +42,7 @@ describe("Search and Sort Transactions", () => {
     vi.restoreAllMocks();
   });
 
+  // New test to check search functionality
   it("filters transactions on search input", async () => {
     render(<AccountContainer />);
 
@@ -55,10 +58,11 @@ describe("Search and Sort Transactions", () => {
     await waitFor(() => {
       expect(screen.getByText("Books")).toBeInTheDocument();
       expect(screen.queryByText("Latte")).not.toBeInTheDocument();
-      expect(screen.queryByText("Groceries")).not.toBeInTheDocument();
+      expect(screen.queryByText("Snacks")).not.toBeInTheDocument();
     });
   });
 
+  // New test to check sort dropdown interaction
   it("responds to sort dropdown change", async () => {
     render(<AccountContainer />);
     const dropdown = screen.getByRole("combobox");
@@ -70,6 +74,7 @@ describe("Search and Sort Transactions", () => {
     });
   });
 
+  // New test to verify sorting functionality
   it("sorts transactions by category when dropdown is changed", async () => {
     render(<AccountContainer />);
 

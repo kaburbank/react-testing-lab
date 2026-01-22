@@ -4,6 +4,7 @@ import React from "react";
 import { beforeEach } from "vitest";
 import { vi } from "vitest";
 
+// Mock transactions data
 const mockTransactions = [
   {
     id: 1,
@@ -15,12 +16,13 @@ const mockTransactions = [
   {
     id: 2,
     date: "2026-01-02",
-    description: "Groceries",
+    description: "Snacks",
     category: "Food",
     amount: "42.00",
   },
 ];
 
+// Tests for displaying transactions
 describe("Display Transactions", () => {
   beforeEach(() => {
     global.fetch = vi.fn(() =>
@@ -34,18 +36,20 @@ describe("Display Transactions", () => {
     vi.restoreAllMocks();
   });
 
+  // Test to check if transactions are displayed on startup
   it("displays transactions on startup", async () => {
     render(<AccountContainer />);
 
     await waitFor(() => {
       expect(screen.getByText("Latte")).toBeInTheDocument();
-      expect(screen.getByText("Groceries")).toBeInTheDocument();
+      expect(screen.getByText("Snacks")).toBeInTheDocument();
       expect(screen.getAllByText("Food")).toHaveLength(2);
       expect(screen.getByText("3.50")).toBeInTheDocument();
       expect(screen.getByText("42.00")).toBeInTheDocument();
     });
   });
 
+  // New test to check the number of rendered transaction rows
   it("renders correct number of transaction rows", async () => {
     render(<AccountContainer />);
     await waitFor(() => {
